@@ -243,6 +243,9 @@ def run(
             if single_cls:
                 pred[:, 5] = 0
             predn = pred.clone()
+            print("--------------DEBUG---------------")
+            print("shape:", shape)
+            print("shapes[si][1]:", shapes[si][1])
             scale_boxes(im[si].shape[1:], predn[:, :4], shape, shapes[si][1])  # native-space pred
 
             # Evaluate
