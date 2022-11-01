@@ -243,19 +243,24 @@ def run(
             if single_cls:
                 pred[:, 5] = 0
             predn = pred.clone()
-            print("--------------DEBUG---------------")
+            print("\n--------------DEBUG---------------")
             print("shape:", shape)
             print("shapes[si][1]:", shapes[si][1])
             scale_boxes(im[si].shape[1:], predn[:, :4], shape, shapes[si][1])  # native-space pred
+            print("predn[0, :4]", predn[0, :4])
+            print("predn[1, :4]", predn[1, :4])
 
             # Evaluate
+            print("nl", nl)
             if nl:
+                print("nl is true")
                 tbox = xywh2xyxy(labels[:, 1:5])  # target boxes
                 scale_boxes(im[si].shape[1:], tbox, shape, shapes[si][1])  # native-space labels
                 labelsn = torch.cat((labels[:, 0:1], tbox), 1)  # native-space labels
                 correct = process_batch(predn, labelsn, iouv)
                 if plots:
                     confusion_matrix.process_batch(predn, labelsn)
+                print("tbox", tbox)
             stats.append((correct, pred[:, 4], pred[:, 5], labels[:, 0]))  # (correct, conf, pcls, tcls)
 
             # Save/log
