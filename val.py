@@ -201,7 +201,7 @@ def run(
         print(targets)
         print("------------paths--------------")
         print(paths)
-         print("------------shapes--------------")
+        print("------------shapes--------------")
         print(shapes)
         callbacks.run('on_val_batch_start')
         with dt[0]:
