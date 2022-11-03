@@ -195,6 +195,14 @@ def run(
     callbacks.run('on_val_start')
     pbar = tqdm(dataloader, desc=s, bar_format='{l_bar}{bar:10}{r_bar}{bar:-10b}')  # progress bar
     for batch_i, (im, targets, paths, shapes) in enumerate(pbar):
+        print("------------im--------------")
+        print(im)
+        print("------------targets--------------")
+        print(targets)
+        print("------------paths--------------")
+        print(paths)
+         print("------------shapes--------------")
+        print(shapes)
         callbacks.run('on_val_batch_start')
         with dt[0]:
             if cuda:
